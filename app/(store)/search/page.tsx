@@ -1,20 +1,17 @@
 import ProductGrid from "@/components/ProductsGrid";
 import { searchProductsByName } from "@/sanity/lib/products/searchProductsByName";
 
+type SearchParams = Record<string, string | undefined>;
+
 async function SearchPage({
   searchParams,
 }: {
-  searchParams: {
-    query: string;
-  };
+  searchParams: SearchParams;
 }) {
-  // Destructure query directly without using `await`
-  const { query } = searchParams;
+  const query = searchParams.query || ""; // Default to an empty string if query is undefined
 
-  // Fetch products based on the query
   const products = await searchProductsByName(query);
 
-  // If no products are found
   if (!products.length) {
     return (
       <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4">
@@ -30,7 +27,6 @@ async function SearchPage({
     );
   }
 
-  // Return product results
   return (
     <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
