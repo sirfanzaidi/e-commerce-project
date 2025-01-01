@@ -7,7 +7,7 @@ const PRODUCT_SERACH_QUERY = defineQuery (`
     *[
         _type == "product"
         && name match $searchParam
-    ] | order(namce asc)
+    ] | order(name asc)
     `);
 
 
@@ -15,7 +15,7 @@ try {
     const products = await sanityFetch ({
         query: PRODUCT_SERACH_QUERY,
         params: {
-            searchParam: `${searchParam}*` ,
+            searchParam: `${searchParam}*`,
         },
     });
     return products.data || [];

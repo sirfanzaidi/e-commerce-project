@@ -485,7 +485,7 @@ export type PRODUCTS_BY_CATEGORY_QUERYResult = Array<{
 
 // Source: ./sanity/lib/products/searchProductsByName.tsx
 // Variable: PRODUCT_SERACH_QUERY
-// Query: *[        _type == "product"        && name match $searchParam    ] | order(namce asc)
+// Query: *[        _type == "product"        && name match $searchParam    ] | order(name asc)
 export type PRODUCT_SERACH_QUERYResult = Array<{
   _id: string;
   _type: "product";
@@ -572,7 +572,7 @@ declare module "@sanity/client" {
     "\n    \n    *[_type == \"product\"]\n| order(name asc)         \n": ALL_PPODUCTS_QUERYResult;
     "\n    \n    *[_type == \"product\" && slug.current == $slug] | order(name asc) [0]\n": PPODUCT_BY_ID_QUERYResult;
     "\n        *[\n            _type == \"product\"\n            && references(*[_type == \"category\" && slug.current == $categorySlug]._id)\n        ] | order(name asc)\n    ": PRODUCTS_BY_CATEGORY_QUERYResult;
-    "\n    *[\n        _type == \"product\"\n        && name match $searchParam\n    ] | order(namce asc)\n    ": PRODUCT_SERACH_QUERYResult;
+    "\n    *[\n        _type == \"product\"\n        && name match $searchParam\n    ] | order(name asc)\n    ": PRODUCT_SERACH_QUERYResult;
     "\n        *[\n            _type == \"sale\"\n            && isActive == true\n            && couponCode  == $couponCode\n         ] | order(validFrom desc) [0]               \n        ": ACTIVE_SALE_BY_COUPON_QUERYResult;
   }
 }
